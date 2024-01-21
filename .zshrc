@@ -11,9 +11,6 @@ zplug "mafredri/zsh-async"
 # テーマ
 zplug "themes/fishy", from:oh-my-zsh, as:theme
 
-#zplug romkatv/powerlevel10k, as:theme, depth:1
-
-#zplug "mrowa44/emojify", as:command
 # コマンドのハイライト
 zplug "zsh-users/zsh-syntax-highlighting"
 # 過去履歴強化
