@@ -53,5 +53,8 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 zstyle ':completion:*' menu true select
 
 # 前方一致 履歴補完
+autoload history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
 bindkey ${key[Up]} history-beginning-search-backward
 bindkey ${key[Down]} history-beginning-search-forward
