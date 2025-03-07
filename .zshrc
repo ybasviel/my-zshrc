@@ -56,5 +56,10 @@ zstyle ':completion:*' menu true select
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
-bindkey ${key[Up]} history-beginning-search-backward
-bindkey ${key[Down]} history-beginning-search-forward
+
+# キーマップの定義
+autoload -Uz zkbd
+typeset -g -A key
+
+bindkey "^[[A" history-beginning-search-backward-end
+bindkey "^[[B" history-beginning-search-forward-end
