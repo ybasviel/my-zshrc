@@ -8,9 +8,6 @@ setopt hist_ignore_all_dups
 # 非同期
 zplug "mafredri/zsh-async"
 
-# テーマ
-zplug "themes/fishy", from:oh-my-zsh, as:theme
-
 # コマンドのハイライト
 zplug "zsh-users/zsh-syntax-highlighting"
 # 過去履歴強化
@@ -31,13 +28,23 @@ if ! zplug check --verbose; then
 fi
 zplug load
 
+# 自作テーマ
+source ${0:A:h}/salmon.zsh-theme
 
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete _correct _approximate
 zstyle ':completion:*' format 'Completing %d'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' menu select=2
-eval "$(dircolors -b)"
+if [[ "$(uname)" == "Darwin" ]]; then
+  # macOS: dircolors unavailable, use LSCOLORS for ls and set LS_COLORS for zsh completion
+  export CLICOLOR=1
+  export LSCOLORS=ExGxFxdxCxDxDxhbadExEx
+  # Approximate LS_COLORS for zsh completion on macOS
+  export LS_COLORS='di=1;34:ln=1;36:so=1;35:pi=33:ex=1;32:bd=1;33:cd=1;33:su=0;41:sg=0;46:tw=0;42:ow=0;43'
+else
+  eval "$(dircolors -b)"
+fi
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
